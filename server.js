@@ -42,7 +42,7 @@ server.listen(PORT, () => {
             // Socket event handlers
             io.on('connection', (socket) => {
                 onlineCount++;
-                socket.send(JSON.stringify({ type: 'onlineCount', count: onlineCount }));
+                socket.emit("onlineCount", { count: onlineCount });
 
                 console.log(`A user connected.(${onlineCount})`);
 

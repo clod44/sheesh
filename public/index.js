@@ -156,6 +156,10 @@ socket.addEventListener('connection', (event) => {
         console.log('Received online count:', onlineCount);
         document.getElementById("navbar-global").textContent = `Global (${onlineCount})`;
     }
+socket.on('onlineCount', (data) => {
+    const count  = data.count;
+    console.log("Online count:", count);
+    document.getElementById("navbar-global").textContent = `Global (${count})`;
 });
 
 //handle incoming chat messages
