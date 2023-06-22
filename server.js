@@ -9,7 +9,6 @@ const server = http.createServer(app);
 const io = socketio(server);
 
 const PORT = process.env.PORT || 3000;
-const MONGODB_URI = process.env.MONGODB_URI;
 
 app.use(express.static("public"));
 
@@ -24,10 +23,10 @@ server.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 
     // Connect to MongoDB
-    MongoClient.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+    MongoClient.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
         .then((client) => {
             console.log("Connected to MongoDB");
-            const db = client.db();
+            const db = client.db("main-database");
             const usersCollection = db.collection('users');
             const messagesCollection = db.collection('messages');
 
