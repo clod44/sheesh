@@ -19,6 +19,7 @@ app.get("/", (req, res) => {
 
 
 
+let onlineCount = 0;
 server.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 
@@ -40,7 +41,10 @@ server.listen(PORT, () => {
 
             // Socket event handlers
             io.on('connection', (socket) => {
-                console.log("A user connected");
+                onlineCount++;
+                socket.send(JSON.stringify({ type: 'onlineCount', count: onlineCount }));
+
+                console.log(`A user connected.(${onlineCount})`);
 
                 socket.on("joinChat", async () => {
                     console.log("joining chat...");
@@ -69,7 +73,6 @@ server.listen(PORT, () => {
                     });
                 });
 
-                // TODO: handle realtime communication
                 socket.on("chatMessage", (newMessageData) => {
                     console.log(`Received message from ${newMessageData.username}: ${newMessageData.message}`);
                     //save the message to database
@@ -79,7 +82,8 @@ server.listen(PORT, () => {
                 });
 
                 socket.on('disconnect', () => {
-                    console.log('A user disconnected');
+                    onlineCount--;
+                    console.log(`A user has disconnected.(${onlineCount})`);
                 });
             });
 

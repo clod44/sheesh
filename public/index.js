@@ -143,6 +143,21 @@ fetch('/users')
     });
 */
 
+// WebSocket connection open event
+socket.addEventListener('open', () => {
+    console.log('WebSocket connection established');
+});
+
+// WebSocket message event
+socket.addEventListener('message', (event) => {
+    const message = JSON.parse(event.data);
+    if (message.type === 'onlineCount') {
+        const onlineCount = message.count;
+        console.log('Received online count:', onlineCount);
+        document.getElementById("navbar-global").text = `Global (${onlineCount})`;
+    }
+});
+
 //handle incoming chat messages
 socket.on('chatMessage', (messageData) => {
     console.log(messageData);
