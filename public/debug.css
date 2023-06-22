@@ -1,0 +1,9 @@
+
+
+.y-scroll{
+    overflow-y: scroll;
+}
+
+.text-glow-light{
+    text-shadow: white 0 0 0.2rem;
+}
