@@ -149,7 +149,7 @@ socket.addEventListener('open', () => {
 });
 
 // WebSocket message event
-socket.addEventListener('message', (event) => {
+socket.addEventListener('connection', (event) => {
     const message = JSON.parse(event.data);
     if (message.type === 'onlineCount') {
         const onlineCount = message.count;
