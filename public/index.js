@@ -154,7 +154,7 @@ socket.addEventListener('connection', (event) => {
     if (message.type === 'onlineCount') {
         const onlineCount = message.count;
         console.log('Received online count:', onlineCount);
-        document.getElementById("navbar-global").text = `Global (${onlineCount})`;
+        document.getElementById("navbar-global").textContent = `Global (${onlineCount})`;
     }
 });
 
