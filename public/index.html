@@ -16,34 +16,34 @@
 <body style="height: 100vh;" class="overflow-hidden">
 
     <!-- Info Modal -->
-<div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content bg-dark text-light ">
-            <!-- Modal Header -->
-            <div class="modal-header bg-black border border-warning rounded-bottom-5 box-shadow">
-                <!-- Info Logo -->
-                <div class="modal-logo d-flex align-items-center text-warning">
-                    <img src="logo.png" alt="Logo" class="img-fluid" style="height: 3rem;">
-                    <p class="h1 modal-title px-3 fs-bold">Sheesh</p>
+    <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-light ">
+                <!-- Modal Header -->
+                <div class="modal-header bg-black border border-warning rounded-bottom-5 box-shadow">
+                    <!-- Info Logo -->
+                    <div class="modal-logo d-flex align-items-center text-warning">
+                        <img src="logo.png" alt="Logo" class="img-fluid" style="height: 3rem;">
+                        <p class="h1 modal-title px-3 fs-bold">Sheesh</p>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Modal Body -->
-            <div class="modal-body">
-                <!-- Info Text -->
-                <p class="modal-text">Your centered information text goes here.</p>
-            </div>
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <!-- Info Text -->
+                    <p class="modal-text">Your centered information text goes here.</p>
+                </div>
 
-            <!-- Modal Footer -->
-            <div class="modal-footer border-0 border-bottom border-warning">
-                <!-- Close Button -->
-                <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal" aria-label="Close">
-                    Okay
-                </button>
+                <!-- Modal Footer -->
+                <div class="modal-footer border-0 border-bottom border-warning">
+                    <!-- Close Button -->
+                    <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal" aria-label="Close">
+                        Okay
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
 
@@ -205,9 +205,14 @@
 
 
 
-        <div class="h-100 overflow-y-scroll  bg-black rounded-3 box-shadow text-light p-4 m-4 mt-0">
-            <div id="all-messages" class="d-flex flex-column flex-shrink-0 gap-3 flex-grow-1 overflow-hidden">
+        <div id="message-page" class="h-100 overflow-y-scroll bg-black rounded-3 box-shadow text-light p-4 m-4 mt-0">
+
+            <div id="all-messages" class="p-5 d-flex flex-column flex-shrink-0 gap-3 flex-grow-1 overflow-hidden">
                 <!-- Chat messages display area -->
+            </div>
+
+            <div style="display: none;">
+                <!-- EXAMPLE MESSAGES -->
                 <div id="example-message" class="message-bubble d-flex">
                     <div
                         class="ms-auto bg-dark text-light p-3 rounded-bottom-5 rounded-start-5 d-flex flex-column border-bottom border-warning overflow-hidden">
@@ -231,27 +236,30 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="flex-shrink-0 rounded-pill overflow-hidden sticky-bottom mx-4 mb-4 box-shadow">
-            <div class="d-flex align-items-center">
-                <div class="flex-grow-1">
-                    <!-- Chat input area -->
-                    <input id="message" type="text"
-                        class="form-control rounded-start-pill bg-black text-light border border-warning "
-                        placeholder="Type your message">
-                </div>
-                <div class="flex-shrink-0">
-                    <button id="send-message" class="btn btn-outline-warning rounded-0 rounded-end-circle">
-                        <i class="bi bi-caret-right-fill"></i>
-                    </button>
+            <div class="flex-shrink-0 rounded-pill overflow-hidden sticky-bottom m-0 mx-4  box-shadow"
+                style="background-color: rgba(0, 0, 0, 0.6);">
+                <div class="d-flex align-items-center">
+                    <div class="flex-grow-1">
+                        <!-- Chat input area -->
+                        <input id="message" type="text"
+                            class="form-control rounded-start-pill text-light border border-warning"
+                            style="background-color: transparent;" placeholder="Type your message">
+                    </div>
+                    <div class="flex-shrink-0">
+                        <button id="send-message" class="btn btn-outline-warning rounded-0 rounded-end-circle">
+                            <i class="bi bi-caret-right-fill"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="index.js"></script>
+            <hr id="scroll-to" class="glowing-line">
+            <p class="font-monospace text-warning text-glow-light" style="font-size: 0.7rem; letter-spacing: 0.2rem;">Sheesh 2023</p>
+        </div>
+
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="index.js"></script>
 </body>
 
 </html>

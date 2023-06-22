@@ -87,7 +87,12 @@ document.addEventListener("DOMContentLoaded", function () {
         timestamp.innerText = formatTime(time);
 
         messagesContainer.appendChild(messageBubble);
-        messageBubble.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+        //this dont quite work due to sticky bottom
+        //messagesContainer.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+        //messageBubble.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+        
+        document.getElementById("scroll-to").scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+
     }
 
     function formatTime(time) {
@@ -98,8 +103,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
         return formattedTime;
     }
+    function removeAllMessages() {
+        const allMessagesDiv = document.getElementById('all-messages');
+        allMessagesDiv.innerHTML = '';
+    }
 
-    function showInfoModal(text, title="Sheesh") {
+    function showInfoModal(text, title = "Sheesh") {
         const infoModal = document.getElementById('infoModal');
         const modalTitle = infoModal.querySelector('.modal-title');
         const modalText = infoModal.querySelector('.modal-text');
@@ -117,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    function updateUserProfile(){
+    function updateUserProfile() {
         const profileUsername = document.getElementById("profileUsername");
         const profilePassword = document.getElementById("profilePassword");
         profileUsername.value = currentUser.username;
@@ -220,6 +229,10 @@ document.addEventListener("DOMContentLoaded", function () {
         currentUser = response;
         updateUserProfile();
         showInfoModal(currentUser.message);
+
+        //clear the messages and re-fetch them
+        removeAllMessages();
+        socket.emit("joinChat");    //fetch messages
     })
 
 

@@ -1,14 +1,12 @@
-
-
-.y-scroll{
+.y-scroll {
     overflow-y: scroll;
 }
 
-.text-glow-light{
+.text-glow-light {
     text-shadow: white 0 0 0.2rem;
 }
 
-.box-shadow{
+.box-shadow {
     box-shadow: black 0 0 1rem;
 }
 
@@ -23,5 +21,33 @@
     bottom: -2px;
     width: 100%;
     height: 2px;
-    background-color: #ffc107; /* Warning color (adjust as needed) */
+    background-color: #ffc107;
+    /* Warning color (adjust as needed) */
+}
+.glowing-line {
+    height: 0.1rem;
+    background-color: white;
+    border: none;
+    border-radius: 100%;
+    /* Remove any default borders */
+    opacity: 1;
+    /* Ensure full opacity */
+    animation: glowing 5s infinite;
+}
+
+@keyframes glowing {
+    0% {
+        box-shadow: 0 0 0.0rem 0.0rem #ffcc00;
+        opacity: 0.0;
+    }
+
+    50% {
+        box-shadow: 0 0 0.1rem 0.1rem #ffcc00;
+        opacity: 0.5;
+    }
+
+    100% {
+        box-shadow: 0 0 0.0rem 0.0rem #ffcc00;
+        opacity: 0.0;
+    }
 }
