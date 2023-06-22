@@ -53,25 +53,54 @@ server.listen(PORT, () => {
                     socket.emit("loadPreviousMessages", allMessages);
                 });
 
-                // NEW USER
-                socket.on("createUser", (userData) => {
+                // LOGIN & REGISTER
+                socket.on("login", async (userData) => {
                     const { username, password } = userData;
-                    console.log(`new user!
+                    console.log(`Login attempt:
                     username: ${username}
                     password: ${password}`);
+                    // Check if the username exists in the database
 
-                    usersCollection.insertOne({ username, password }, (error, result) => {
-                        if (error) {
-                            // Handle the insertion failure
-                            console.log("user creation failed:" + error);
-                            // socket.emit('userCreated', { success: false, message: 'Failed to save user information' });
+                    const cursor = usersCollection.find({ username: username });
+                    const foundUsers = await cursor.toArray();
+                    if (foundUsers.length < 1) {
+                        //such user doesnt exists
+                        const newUser = {
+                            username: username,
+                            password: password,
+                            authentication: true,
+                            message: "new user has been created"
+                        };
+                        usersCollection.insertOne(newUser);
+                        socket.emit("userAuthentication", newUser);
+                    } else {
+                        const user = foundUsers[0];
+                        // Username exists, check the password
+                        if (user.password === password) {
+                            // Password matches, user authenticated
+                            const response = {
+                                username: user.username,
+                                password: user.password,
+                                authentication: true,
+                                message: "Successfully logged in"
+                            };
+                            socket.emit("userAuthentication", response);
                         } else {
-                            // Handle the insertion success
-                            console.log("user creation successful");
-                            // socket.emit('userCreated', { success: true });
+                            //incorrect password
+                            const response = {
+                                username: "guest",
+                                password: "guest",
+                                authentication: false,
+                                message: "Incorrect password"
+                            };
+                            socket.emit("userAuthentication", response);
                         }
-                    });
+                    }
                 });
+
+
+
+
 
                 socket.on("chatMessage", (newMessageData) => {
                     console.log(`Received message from ${newMessageData.username}: ${newMessageData.message}`);

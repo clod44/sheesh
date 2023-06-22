@@ -15,6 +15,38 @@
 
 <body style="height: 100vh;" class="overflow-hidden">
 
+    <!-- Info Modal -->
+<div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark text-light ">
+            <!-- Modal Header -->
+            <div class="modal-header bg-black border border-warning rounded-bottom-5 box-shadow">
+                <!-- Info Logo -->
+                <div class="modal-logo d-flex align-items-center text-warning">
+                    <img src="logo.png" alt="Logo" class="img-fluid" style="height: 3rem;">
+                    <p class="h1 modal-title px-3 fs-bold">Sheesh</p>
+                </div>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <!-- Info Text -->
+                <p class="modal-text">Your centered information text goes here.</p>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer border-0 border-bottom border-warning">
+                <!-- Close Button -->
+                <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal" aria-label="Close">
+                    Okay
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
     <!-- Login Modal -->
     <div class="modal fade text-light" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel"
         aria-hidden="true">
@@ -30,12 +62,29 @@
                     <form id="loginForm">
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control bg-dark text-light" id="username"
+                            <input type="text" class="form-control bg-dark text-light" name="username"
                                 aria-describedby="emailHelp">
                         </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control bg-dark text-light" id="password">
+                        <div class="mb-3 togglePasswordForm">
+                            <label for="profilePassword" class="form-label">Password</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control bg-dark text-light" id="loginPassword"
+                                    name="password">
+                                <button class="btn btn-outline-warning rounded-end" type="button"
+                                    id="loginTogglePassword">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+
+                                <script>
+                                    const loginPassword = document.getElementById('loginPassword');
+                                    const loginTogglePassword = document.getElementById('loginTogglePassword');
+                                    loginTogglePassword.addEventListener('click', () => {
+                                        const type = loginPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+                                        loginPassword.setAttribute('type', type);
+                                        loginTogglePassword.innerHTML = type === 'password' ? '<i class="bi bi-eye"></i>' : '<i class="bi bi-eye-slash"></i>';
+                                    });
+                                </script>
+                            </div>
                         </div>
                         <!-- Add your login/signup form fields here -->
                         <button type="submit" class="btn btn-warning">Let's Go</button>
@@ -44,6 +93,69 @@
             </div>
         </div>
     </div>
+
+
+    <!-- Profile Modal -->
+    <div class="modal fade text-light" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title text-warning" id="profileModalLabel">Profile</h5>
+                    <button type="button" class="btn-close text-light" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <!-- Profile Picture -->
+                    <div class="mb-3">
+                        <img id="profilePicturePreview" src="placeholder.jpg" alt="Profile Picture"
+                            class="rounded-circle mt-2" style="width: 100px; height: 100px;">
+                        <input type="file" class="form-control bg-dark text-light" id="profilePictureInput"
+                            accept="image/*" hidden>
+                    </div>
+
+
+                    <!-- Username -->
+                    <div class="mb-3">
+                        <label for="profileUsername" class="form-label">Username</label>
+                        <input type="text" class="form-control bg-dark text-light" id="profileUsername"
+                            aria-describedby="profileUsernameHelp" readonly name="username">
+                    </div>
+
+                    <!-- Password -->
+                    <div class="mb-3">
+                        <label for="profilePassword" class="form-label">Password</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control bg-dark text-light" name="password"
+                                id="profilePassword" readonly>
+                            <button class="btn btn-outline-warning rounded-end" type="button"
+                                id="profileTogglePassword">
+                                <i class="bi bi-eye"></i>
+                            </button>
+
+                            <script>
+                                const profilePassword = document.getElementById('profilePassword');
+                                const profileTogglePassword = document.getElementById('profileTogglePassword');
+                                profileTogglePassword.addEventListener('click', () => {
+                                    const type = profilePassword.getAttribute('type') === 'password' ? 'text' : 'password';
+                                    profilePassword.setAttribute('type', type);
+                                    profileTogglePassword.innerHTML = type === 'password' ? '<i class="bi bi-eye"></i>' : '<i class="bi bi-eye-slash"></i>';
+                                });
+                            </script>
+                        </div>
+                    </div>
+
+                    <!-- Add additional profile information fields here -->
+
+                    <button type="submit" class="btn btn-warning">aight</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 
 
     <!-- PAGE -->
@@ -69,8 +181,8 @@
                             </li>
                             <li class="nav-item"><a href="#" class="nav-link px-3 py-2 text-light rounded-pill">DM</a>
                             </li>
-                            <li class="nav-item"><a href="#"
-                                    class="nav-link px-3 py-2 text-light rounded-pill">Users</a></li>
+                            <li class="nav-item"><a href="#" class="nav-link px-3 py-2 text-light rounded-pill"
+                                    data-bs-toggle="modal" data-bs-target="#profileModal">Profile</a></li>
                             <li class="nav-item"><a href="#" class="nav-link px-3 py-2 text-light rounded-pill">FAQs</a>
                             </li>
                             <li class="nav-item"><a href="#"
@@ -93,9 +205,8 @@
 
 
 
-        <div class="h-100 overflow-y-scroll  bg-black rounded-3 box-shadow text-light p-4 m-4 mt-0" >
-            <div id="all-messages"
-                class="d-flex flex-column flex-shrink-0 gap-3 flex-grow-1 overflow-hidden">
+        <div class="h-100 overflow-y-scroll  bg-black rounded-3 box-shadow text-light p-4 m-4 mt-0">
+            <div id="all-messages" class="d-flex flex-column flex-shrink-0 gap-3 flex-grow-1 overflow-hidden">
                 <!-- Chat messages display area -->
                 <div id="example-message" class="message-bubble d-flex">
                     <div
