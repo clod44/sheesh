@@ -143,19 +143,7 @@ fetch('/users')
     });
 */
 
-// WebSocket connection open event
-socket.addEventListener('open', () => {
-    console.log('WebSocket connection established');
-});
-
 // WebSocket message event
-socket.addEventListener('connection', (event) => {
-    const message = JSON.parse(event.data);
-    if (message.type === 'onlineCount') {
-        const onlineCount = message.count;
-        console.log('Received online count:', onlineCount);
-        document.getElementById("navbar-global").textContent = `Global (${onlineCount})`;
-    }
 socket.on('onlineCount', (data) => {
     const count  = data.count;
     console.log("Online count:", count);
