@@ -41,7 +41,68 @@ function getCookieValue(cookieName) {
 
 // Get the session token from the cookie
 let sessionToken = getCookieValue('session');
-function updateSessionToken(){
+function updateSessionToken() {
     sessionToken = getCookieValue('session');
 }
-clog(sessionToken)
+clog("sessionToken: ", sessionToken == null ? " no token " : sessionToken)
+
+
+
+function compressAndResizeImage(imageDataUrl, maxWidth, maxHeight, quality = 0.8) {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = function () {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+
+            // Resize the canvas to the desired dimensions
+            canvas.width = maxWidth;
+            canvas.height = maxHeight;
+
+            // Draw the image onto the canvas
+            ctx.drawImage(img, 0, 0, maxWidth, maxHeight);
+
+            // Get the compressed data URL
+            const compressedImage = canvas.toDataURL('image/jpeg', quality);
+
+            // Resolve the promise with the compressed image data URL
+            resolve(compressedImage);
+        };
+
+        // Set the source of the image to the provided data URL
+        img.src = imageDataUrl;
+    });
+}
+
+
+
+
+
+
+// Convert data URL to Blob
+function dataURLtoBlob(dataURL) {
+    const byteString = atob(dataURL.split(',')[1]);
+    const mimeString = dataURL.split(',')[0].split(':')[1].split(';')[0];
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+    for (let i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+    return new Blob([ab], { type: mimeString });
+}
+
+
+
+
+async function updateOnlineCount(target) {
+    try {
+        const response = await fetch("/api/onlineCount");
+        const data = await response.json();
+        target.textContent = `Global (${data.onlineCount})`
+    } catch (error) {
+        clog("Error:", error)
+    }
+}
+
+
+

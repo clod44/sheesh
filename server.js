@@ -6,6 +6,9 @@ const { MongoClient } = require('mongodb');
 const { v4: uuidv4 } = require('uuid');
 const cookieParser = require('cookie-parser');
 const path = require('path');
+const multer = require('multer');
+const fs = require('fs');
+const sharp = require('sharp');
 
 const app = express();
 const server = http.createServer(app);
@@ -13,8 +16,9 @@ const io = socketio(server);
 
 const PORT = process.env.PORT || 3000;
 
-//set static directory
+//set static directories
 app.use(express.static("public"));
+app.use('/pfp', express.static(path.join(__dirname, 'uploads/pfp')));
 // Add middleware to parse JSON data in the request body
 app.use(express.json());
 // Add middleware to parse URL-encoded data in the request body
@@ -23,13 +27,30 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.get("/", (req, res) => {
-    const filePath = path.join(__dirname, "public", "index.html");
-    res.sendFile(__dirname + "/index.html");
+    const filePath = path.resolve(__dirname, 'public', 'login.html');
+    res.sendFile(filePath);
 });
 app.get("/login", (req, res) => {
     const filePath = path.join(__dirname, "public", "login.html");
     res.sendFile(filePath);
 });
+app.get("/profile", (req, res) => {
+    const filePath = path.join(__dirname, "public", "profile.html");
+    res.sendFile(filePath);
+});
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './uploads/pfp/');
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname);
+    },
+});
+
+
+const upload = multer({ storage: storage })
+
+
 
 app.get("/api/onlineCount", (req, res) => {
     res.send({
@@ -54,33 +75,27 @@ server.listen(PORT, () => {
             const authenticate = async (req, res, next) => {
                 // Retrieve the session token from the request cookie
                 const sessionToken = req.cookies.session;
-
-                // Check if the username exists in the database
-                const cursor = usersCollection.find({ sessionToken: sessionToken });
-                const foundUsers = await cursor.toArray();
-                if (foundUsers.length < 1) {
-                    // If the session token is valid, allow access to the route
-                    next();
-                    clog("request accepted")
+                if (sessionToken == undefined) {
+                    req.isAuthenticated = false
                 } else {
-                    // If the session token is invalid or missing, redirect to login
+                    // Check if the username exists in the database
+                    const cursor = usersCollection.find({ sessionToken: sessionToken });
+                    const foundUsers = await cursor.toArray();
 
-                    const filePath = path.resolve(__dirname, 'public', 'login.html');
-                    res.sendFile(filePath);
-
-                    clog("unauthorized request was denied")
+                    req.isAuthenticated = (foundUsers.length > 0);
                 }
+                clog("access authorization : ", req.isAuthenticated, " : ", req.cookies.session, " : ", req.ip)
+
+                if (!req.isAuthenticated) {
+                    res.json({ success: false })
+                    return
+                }
+                next();
             };
 
-            /*
-            // Protected route example
-            app.get('/profile', authenticate, (req, res) => {
-                // Accessible only for authenticated users
-                res.send('Welcome to the profile page');
-            });
-            */
 
             app.get("/api/profile", authenticate, async (req, res) => {
+
                 const cursor = usersCollection.find({ sessionToken: req.cookies.session });
                 const foundUsers = await cursor.toArray();
 
@@ -88,8 +103,51 @@ server.listen(PORT, () => {
                     return res.redirect("/login");
                 }
 
-                res.json(foundUsers[0]);
+                res.json({ success: true, data: foundUsers[0] });
             });
+
+
+
+            app.post('/api/upload', upload.single('pfp'), async (req, res) => {
+                try {
+                    const username = req.body.username;
+                    if (!username) {
+                        return res.status(400).json({ message: 'Username is required' });
+                    }
+                    if (!req.file) {
+                        return res.status(400).json({ message: 'No file uploaded' });
+                    }
+
+                    // CONVERT AND RENAME: username.jpeg
+                    const newFilename = `${username}.jpeg`;
+                    const newPath = path.join('./uploads/pfp/', newFilename);
+
+                    await sharp(req.file.path)
+                        .resize(128, 128)
+                        .toFormat('jpeg')
+                        .jpeg({ quality: 80 })
+                        .toFile(newPath);
+
+                    await db.collection('users').updateOne(
+                        { username: username },
+                        { $set: { profilePicture: `${newFilename}` } }
+                    );
+
+                    // Delete the original file
+                    fs.unlink(req.file.path, (err) => {
+                        if (err) {
+                            console.error(err);
+                            return res.status(500).json({ message: 'Error deleting the original file' });
+                        }
+                        res.status(200).json({ message: 'File uploaded and converted successfully' });
+                    });
+                } catch (error) {
+                    console.error(error);
+                    res.status(500).json({ message: 'An error occurred during file upload' });
+                }
+            });
+
+
 
 
             //get all users
@@ -121,24 +179,21 @@ server.listen(PORT, () => {
                 res.status(200).json({ message: 'Login successful' });
             });
 
-            app.get('/api/logout', authenticate, async (req, res) => {
-                clog("Logging out:", username, password);
+            app.post('/api/logout', authenticate, async (req, res) => {
                 const sessionToken = req.cookies.session;
 
                 //no need to check if sessionToken exists because we already authenticate in order to proceed
                 //const cursor = usersCollection.find({ seesionToken }); ...
-
                 //welp.. in order to update, we need to search for it anyways bruh
                 await usersCollection.updateOne(
                     { sessionToken },
                     {
-                        $set: { 'sessionToken': false },
+                        $set: { 'sessionToken': undefined },
                         $currentDate: { lastModified: true }
                     }
                 );
-
                 res.clearCookie('session');
-                res.redirect('/login');
+                res.json({ success: true, data: 'logout successful' });
             });
 
             // Socket event handlers
@@ -195,7 +250,8 @@ async function loginAttempt(usersCollection, username, password) {
         const newUser = {
             username,
             password,
-            sessionToken
+            sessionToken,
+            profilePicture : false
         };
         usersCollection.insertOne(newUser);
         clog("new user has been registered: ", newUser)

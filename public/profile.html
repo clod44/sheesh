@@ -39,34 +39,44 @@
         </div>
     </nav>
 
-
     <div class="container">
-        <div class="card overflow-hidden shadow-lg">
+        <div class="card overflow-hidden shadow-lg border-warning">
             <div class="card-body bg-black bg-gradient text-light">
-                <div class="text-center">
-                    <img src="./assets/images/placeholder.jpg" class="rounded-circle profile-pic" alt="Profile Picture">
-                </div>
-                <div class="mt-4">
-                    <div class="mb-3">
-                        <label for="username" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="username" readonly>
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
+                <form id="profile-form" action="/api/upload" method="POST" enctype="multipart/form-data">
+                    <div class="text-center">
+                        <img id="profile-image"
+                            class="mb-5 rounded-circle profile-pic w-50 border border-warning shadow-lg"
+                            src="./assets/images/placeholder.jpg" style="cursor: pointer;">
                         <div class="input-group">
-                            <input type="password" class="form-control" id="password" readonly>
-                            <button class="btn btn-outline-warning" type="button" id="toggle-password">
-                                <i class="bi bi-eye-fill"></i>
-                            </button>
+                            <input class="form-control" id="image-input" type="file" name="pfp" accept="image/*" />
+                            <button type="submit" class="btn btn-outline-warning">Upload</button>
                         </div>
                     </div>
-                </div>
-                <div class="text-center">
-                    <button class="btn btn-warning" id="logout-button">Logout</button>
-                </div>
+
+                    <div class="mt-4">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" name="username">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="password" name="password" readonly>
+                                <button class="btn btn-outline-warning" type="button" id="toggle-password">
+                                    <i class="bi bi-eye-fill"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-warning" id="logout-button">Logout</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const togglePasswordBtn = document.getElementById("toggle-password");
