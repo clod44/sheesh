@@ -1,0 +1,31 @@
+
+
+
+
+.glow-white {
+    box-shadow: 0 0 1rem white;
+}
+.glow-warning {
+    box-shadow: 0 0 1rem rgb(255, 193, 7);
+}
+.glow-text-white {
+    text-shadow: 0 0 0.3rem white;
+}
+.glow-text-warning {
+    text-shadow: 0 0 0.3rem rgb(255, 193, 7);
+}
+.glow-image-warning{
+    filter: drop-shadow(0 0 0.5rem rgb(255, 193, 7));
+}
+.image-shadow{
+    filter: drop-shadow(0 0 1rem rgba(0, 0, 0, 0.445));
+}
+
+
+
+
+
+
+
+
+

@@ -7,259 +7,198 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css" />
+
+    <link rel="stylesheet" href="./assets/css/utils.css">
+    <link rel="stylesheet" href="./assets/css/index.css">
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
     <title>Sheesh</title>
 </head>
 
-<body style="height: 100vh;" class="overflow-hidden">
 
-    <!-- Info Modal -->
-    <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content bg-dark text-light ">
-                <!-- Modal Header -->
-                <div class="modal-header bg-black border border-warning rounded-bottom-5 box-shadow">
-                    <!-- Info Logo -->
-                    <div class="modal-logo d-flex align-items-center text-warning">
-                        <img src="logo.png" alt="Logo" class="img-fluid" style="height: 3rem;">
-                        <p class="h1 modal-title px-3 fs-bold">Sheesh</p>
-                    </div>
-                </div>
+<body class="bg-black bg-gradient">
 
-                <!-- Modal Body -->
-                <div class="modal-body">
-                    <!-- Info Text -->
-                    <p class="modal-text">Your centered information text goes here.</p>
+    <nav class="navbar navbar-expand-md bg-black bg-gradient sticky-top">
+        <div class="container-fluid">
+            <a href="./index.html" class="navbar-brand text-light mx-5 d-flex align-items-center">
+                <img src="./assets/images/logo.png" class="glow-image-warning" style="width: 3rem; height: 3rem;">
+                <h1 class="d-inline mx-3">Sheesh</h1>
+            </a>
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="navbar-nav ms-auto">
+                    <a href="./index.html" class="nav-link text-light active">About</a>
+                    <a id="btn-navbar-global" href="#" class="nav-link text-light glow-text-warning">Global</a>
+                    <a href="./profile.html" class="nav-link text-light">Profile</a>
+                    <a href="#" class="nav-link text-light">Direct Messages</a>
                 </div>
+            </div>
+        </div>
+    </nav>
 
-                <!-- Modal Footer -->
-                <div class="modal-footer border-0 border-bottom border-warning">
-                    <!-- Close Button -->
-                    <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal" aria-label="Close">
-                        Okay
-                    </button>
+
+    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3"
+                aria-label="Slide 4"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4"
+                aria-label="Slide 5"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="./assets/images/car.jpg" class="d-block w-100 carousel-image" alt="...">
+                <div class="carousel-caption d-none d-md-block bg-black shadow rounded bg-gradient border border-warning border-top-0 border-start-0">
+                    <h5 class="text-warning lead">First slide label</h5>
+                    <p>Some representative placeholder content for the first slide.</p>
                 </div>
+            </div>
+            <div class="carousel-item">
+                <img src="./assets/images/man.jpg" class="d-block w-100 carousel-image" alt="...">
+                <div class="carousel-caption d-none d-md-block bg-black shadow rounded bg-gradient border border-warning border-top-0 border-start-0">
+                    <h5 class="text-warning lead">First slide label</h5>
+                    <p>Some representative placeholder content for the first slide.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="./assets/images/ak47.jpg" class="d-block w-100 carousel-image" alt="...">
+                <div class="carousel-caption d-none d-md-block bg-black shadow rounded bg-gradient border border-warning border-top-0 border-start-0">
+                    <h5 class="text-warning lead">First slide label</h5>
+                    <p>Some representative placeholder content for the first slide.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="./assets/images/riot.jpg" class="d-block w-100 carousel-image" alt="...">
+                <div class="carousel-caption d-none d-md-block bg-black shadow rounded bg-gradient border border-warning border-top-0 border-start-0">
+                    <h5 class="text-warning lead">First slide label</h5>
+                    <p>Some representative placeholder content for the first slide.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="./assets/images/terror.jpg" class="d-block w-100 carousel-image" alt="...">
+                <div class="carousel-caption d-none d-md-block bg-black shadow rounded bg-gradient border border-warning border-top-0 border-start-0">
+                    <h5 class="text-warning lead">First slide label</h5>
+                    <p>Some representative placeholder content for the first slide.</p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+
+    <div class="container mt-5">
+        <div
+            class="row shadow rounded p-5 border border-warning border-top-0 border-start-0 mb-5 bg-dark bg-gradient text-light">
+            <div class="col-md-6 d-flex align-items-center flex-column text-start justify-content-center">
+                <h2 class="text-light fw-bold mb-3 glow-text-warning">World Wide Messaging</h2>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo ex voluptas commodi in dolorem
+                    nihil obcaecati hic possimus molestias corrupti, reprehenderit exercitationem architecto repudiandae
+                    reiciendis vero quas, nesciunt dignissimos, vitae error id temporibus delectus perspiciatis. Numquam
+                    labore mollitia modi fugit beatae nisi, consectetur quidem vitae. Possimus, id fuga necessitatibus
+                </p>
+                <button class="btn btn-outline-warning">Contact Us</button>
+            </div>
+            <div class="col-md-6 d-flex align-items-center justify-content-around">
+                <img src="./assets/images/messaging.png" style="height: 20rem;" class="img-fluid image-shadow">
+            </div>
+        </div>
+
+        <div
+            class="row shadow rounded p-5 border border-warning border-top-0 border-start-0 mb-5 bg-dark bg-gradient text-light">
+            <div class="col-md-6 d-flex align-items-center justify-content-around">
+                <img src="./assets/images/messaging.png" style="height: 20rem;" class="img-fluid image-shadow">
+            </div>
+            <div class="col-md-6 d-flex align-items-center flex-column text-end justify-content-center">
+                <h2 class="text-light glow-text-warning fw-bold mb-3">World Wide Messaging</h2>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo ex voluptas commodi in dolorem
+                    nihil obcaecati hic possimus molestias corrupti, reprehenderit exercitationem architecto repudiandae
+                    reiciendis vero quas, nesciunt dignissimos, vitae error id temporibus delectus perspiciatis. Numquam
+                    labore mollitia modi fugit beatae nisi, consectetur quidem vitae. Possimus, id fuga necessitatibus
+                </p>
+                <button class="btn btn-outline-warning">Contact Us</button>
             </div>
         </div>
     </div>
 
 
-
-    <!-- Login Modal -->
-    <div class="modal fade text-light" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content bg-dark">
-                <div class="modal-header border-0">
-                    <h5 class="modal-title text-warning" id="loginModalLabel">Login/Sign Up</h5>
-                    <button type="button" class="btn-close text-light" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <!-- Place your login/signup form or content here -->
-                    <form id="loginForm">
-                        <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control bg-dark text-light" name="username"
-                                aria-describedby="emailHelp">
-                        </div>
-                        <div class="mb-3 togglePasswordForm">
-                            <label for="profilePassword" class="form-label">Password</label>
-                            <div class="input-group">
-                                <input type="password" class="form-control bg-dark text-light" id="loginPassword"
-                                    name="password">
-                                <button class="btn btn-outline-warning rounded-end" type="button"
-                                    id="loginTogglePassword">
-                                    <i class="bi bi-eye"></i>
-                                </button>
-
-                                <script>
-                                    const loginPassword = document.getElementById('loginPassword');
-                                    const loginTogglePassword = document.getElementById('loginTogglePassword');
-                                    loginTogglePassword.addEventListener('click', () => {
-                                        const type = loginPassword.getAttribute('type') === 'password' ? 'text' : 'password';
-                                        loginPassword.setAttribute('type', type);
-                                        loginTogglePassword.innerHTML = type === 'password' ? '<i class="bi bi-eye"></i>' : '<i class="bi bi-eye-slash"></i>';
-                                    });
-                                </script>
-                            </div>
-                        </div>
-                        <!-- Add your login/signup form fields here -->
-                        <button type="submit" class="btn btn-warning">Let's Go</button>
-                    </form>
-                </div>
+    <div class="container py-5">
+        <img src="./assets/images/worldmap.png" class="image-fluid w-100 mb-4 glow-image-warning">
+        <div class="card text-center bg-dark bg-gradient text-white border border-warning border-start-0 border-top-0">
+            <div class="card-header bg-warning fw-bold text-black bg-gradient glow-warning">
+                Update V1.0.0
+            </div>
+            <div class="card-body">
+                <h5 class="card-title text-white glow-text-white">Special Update (EASTERN EUROPE)</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-outline-warning">Go somewhere</a>
+            </div>
+            <div class="card-footer text-light small">
+                2 days ago
             </div>
         </div>
+
     </div>
 
-
-    <!-- Profile Modal -->
-    <div class="modal fade text-light" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content bg-dark">
-                <div class="modal-header border-0">
-                    <h5 class="modal-title text-warning" id="profileModalLabel">Profile</h5>
-                    <button type="button" class="btn-close text-light" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+    <footer class="footer text-light p-4 bg-black">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div id="map" class="footer-map" style="height: 100%;"></div>
                 </div>
-
-                <div class="modal-body">
-                    <!-- Profile Picture -->
-                    <div class="mb-3">
-                        <img id="profilePicturePreview" src="placeholder.jpg" alt="Profile Picture"
-                            class="rounded-circle mt-2" style="width: 100px; height: 100px;">
-                        <input type="file" class="form-control bg-dark text-light" id="profilePictureInput"
-                            accept="image/*" hidden>
-                    </div>
-
-
-                    <!-- Username -->
-                    <div class="mb-3">
-                        <label for="profileUsername" class="form-label">Username</label>
-                        <input type="text" class="form-control bg-dark text-light" id="profileUsername"
-                            aria-describedby="profileUsernameHelp" readonly name="username">
-                    </div>
-
-                    <!-- Password -->
-                    <div class="mb-3">
-                        <label for="profilePassword" class="form-label">Password</label>
-                        <div class="input-group">
-                            <input type="password" class="form-control bg-dark text-light" name="password"
-                                id="profilePassword" readonly>
-                            <button class="btn btn-outline-warning rounded-end" type="button"
-                                id="profileTogglePassword">
-                                <i class="bi bi-eye"></i>
-                            </button>
-
-                            <script>
-                                const profilePassword = document.getElementById('profilePassword');
-                                const profileTogglePassword = document.getElementById('profileTogglePassword');
-                                profileTogglePassword.addEventListener('click', () => {
-                                    const type = profilePassword.getAttribute('type') === 'password' ? 'text' : 'password';
-                                    profilePassword.setAttribute('type', type);
-                                    profileTogglePassword.innerHTML = type === 'password' ? '<i class="bi bi-eye"></i>' : '<i class="bi bi-eye-slash"></i>';
-                                });
-                            </script>
-                        </div>
-                    </div>
-
-                    <!-- Add additional profile information fields here -->
-
-                    <button type="submit" class="btn btn-warning">aight</button>
+                <div class="col-md-6">
+                    <h4>Contact Information</h4>
+                    <ul class="list-unstyled">
+                        <li><i class="fa fa-map-marker"></i> 123 Main Street, City, Country</li>
+                        <li><i class="fa fa-phone"></i> +1 123-456-7890</li>
+                        <li><i class="fa fa-envelope"></i> info@example.com</li>
+                    </ul>
+                    <p>&copy; 2023 Your Company. All rights reserved.</p>
                 </div>
             </div>
         </div>
-    </div>
+    </footer>
 
 
 
 
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        // Initialize the map
+        var map = L.map('map').setView([51.505, -0.09], 13);
 
-    <!-- PAGE -->
-    <div class="d-flex flex-column h-100 bg-black bg-gradient">
-        <header class="p-3 sticky-top">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-black rounded-3 box-shadow">
-                <div class="container">
-                    <a href="/"
-                        class="navbar-brand d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                        <img src="logo.png" alt="Logo" class="navbar-logo img-fluid" style="height: 3rem;">
-                    </a>
+        // Add the OpenStreetMap tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+            maxZoom: 18,
+        }).addTo(map);
 
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+        // Add a marker to the map
+        var marker = L.marker([51.5, -0.09]).addTo(map);
+    </script>
 
-                    <div class="collapse navbar-collapse" id="navbarCollapse">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="letter-spacing: 2px;">
-                            <li class="nav-item"><a href="#" id="navbar-global"
-                                    class="nav-link px-3 py-2 warning-underline text-secondary  fw-bold rounded-pill">Global</a>
-                            </li>
-                            <li class="nav-item"><a href="#" class="nav-link px-3 py-2 text-light rounded-pill">DM</a>
-                            </li>
-                            <li class="nav-item"><a href="#" class="nav-link px-3 py-2 text-light rounded-pill"
-                                    data-bs-toggle="modal" data-bs-target="#profileModal">Profile</a></li>
-                            <li class="nav-item"><a href="#" class="nav-link px-3 py-2 text-light rounded-pill">FAQs</a>
-                            </li>
-                            <li class="nav-item"><a href="#"
-                                    class="nav-link px-3 py-2 text-light rounded-pill">About</a></li>
-                        </ul>
-
-
-                        <div class="text-end">
-                            <!-- Button to trigger the modal -->
-                            <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal"
-                                data-bs-target="#loginModal">
-                                Login/Sign Up
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        </header>
-
-
-
-
-        <div id="message-page" class="h-100 overflow-y-scroll bg-black rounded-3 box-shadow text-light p-4 m-4 mt-0">
-
-            <div id="all-messages" class="p-5 d-flex flex-column flex-shrink-0 gap-3 flex-grow-1 overflow-hidden">
-                <!-- Chat messages display area -->
-            </div>
-
-            <div style="display: none;">
-                <!-- EXAMPLE MESSAGES -->
-                <div id="example-message" class="message-bubble d-flex">
-                    <div
-                        class="ms-auto bg-dark text-light p-3 rounded-bottom-5 rounded-start-5 d-flex flex-column border-bottom border-warning overflow-hidden">
-                        <span class="small text-light text-glow-light ms-auto _example-username">Username</span>
-                        <div class="_example-content">asdahfsak laksfhlkasdf </div>
-                        <span class="small ms-auto text-secondary _example-time">12:34 PM</span>
-                    </div>
-                    <img src="placeholder.jpg" alt="Profile Picture"
-                        class="rounded-pill border-bottom border-3 border-warning"
-                        style="width: 5%; min-width: 5%; height: min-content; object-fit: contain;">
-                </div>
-                <div id="example-reply" class="message-bubble d-flex">
-                    <img src="placeholder.jpg" alt="Profile Picture"
-                        class="rounded-pill border-bottom border-3 border-warning"
-                        style="width: 5%; min-width: 5%; height: min-content; object-fit: contain;">
-                    <div
-                        class=" bg-dark text-light p-3 rounded-bottom-5 rounded-end-5 d-flex flex-column border-bottom border-warning overflow-hidden">
-                        <span class="small text-light text-glow-light _example-username">Username</span>
-                        <div class="_example-content">gluglu</div>
-                        <span class="small ms-auto text-secondary _example-time">12:34 PM</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex-shrink-0 rounded-pill overflow-hidden sticky-bottom m-0 mx-4  box-shadow"
-                style="background-color: rgba(0, 0, 0, 0.6);">
-                <div class="d-flex align-items-center">
-                    <div class="flex-grow-1">
-                        <!-- Chat input area -->
-                        <input id="message" type="text"
-                            class="form-control rounded-start-pill text-light border border-warning"
-                            style="background-color: transparent;" placeholder="Type your message">
-                    </div>
-                    <div class="flex-shrink-0">
-                        <button id="send-message" class="btn btn-outline-warning rounded-0 rounded-end-circle">
-                            <i class="bi bi-caret-right-fill"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <hr id="scroll-to" class="glowing-line">
-            <p class="font-monospace text-warning text-glow-light" style="font-size: 0.7rem; letter-spacing: 0.2rem;">Sheesh 2023</p>
-        </div>
-
-        <script src="/socket.io/socket.io.js"></script>
-        <script src="index.js"></script>
+    <script src="./assets/js/utils.js"></script>
+    <script src="./assets/js/index.js"></script>
 </body>
 
 </html>

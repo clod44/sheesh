@@ -1,0 +1,11 @@
+.y-scroll {
+    overflow-y: scroll;
+}
+
+
+
+
+.carousel-image{
+    height: 40rem;
+    object-fit: cover;
+}
