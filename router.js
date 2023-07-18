@@ -1,28 +1,25 @@
 
 
+const express = require('express');
+const router = express.Router();
+
+const middlewares = require("./middlewares.js")
+
+const pageController = require("./controllers/pageController");
+const apiController = require("./controllers/apiController.js");
 
 
+router.get("/", pageController.getHomePage);
+//router.get("/login", pageController.getLoginPage);
+router.get("/profile", authenticate, pageController.getProfilePage);
+router.post('/api/upload', authenticate, upload.single('pfp'), apiController.uploadFile);
+router.get('/api/users', authenticate, apiController.getAllUsers);
+router.post('/api/login', apiController.loginUser);
+router.post('/api/logout', authenticate, apiController.logoutUser);
 
-
-
-const homeController = require("./controllers/homeController")
-const loginController = require("./controllers/loginController")
-const profileController = require("./controllers/profileController")
-
-
-
-app.get("/", homeController.getHomePage);
-app.get("/login", loginController.getLoginPage);
-app.get("/profile", profileController.getProfilePage);
-
-
-
-
-
-
-
-
-
+module.exports = {
+    router
+}
 
 
 
