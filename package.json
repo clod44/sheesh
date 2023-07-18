@@ -1,6 +1,6 @@
 {
   "name": "sheesh",
-  "version": "1.0.0",
+  "version": "dev-2.0.0",
   "description": "simple online messaging website",
   "main": "server.js",
   "scripts": {
