@@ -1,0 +1,35 @@
+
+<footer class="footer text-light p-4 bg-black">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div id="map" class="footer-map" style="height: 100%;"></div>
+            </div>
+            <div class="col-md-6">
+                <h4>Contact Information</h4>
+                <ul class="list-unstyled">
+                    <li><i class="fa fa-map-marker"></i> 123 Main Street, City, Country</li>
+                    <li><i class="fa fa-phone"></i> +1 123-456-7890</li>
+                    <li><i class="fa fa-envelope"></i> info@example.com</li>
+                </ul>
+                <p>&copy; 2023 Your Company. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+<script>
+    // Initialize the map
+    var map = L.map('map').setView([51.505, -0.09], 13);
+
+    // Add the OpenStreetMap tile layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+        maxZoom: 18,
+    }).addTo(map);
+
+    // Add a marker to the map
+    var marker = L.marker([51.5, -0.09]).addTo(map);
+</script>

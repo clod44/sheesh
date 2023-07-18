@@ -16,6 +16,9 @@ const io = socketio(server);
 
 const PORT = process.env.PORT || 3000;
 
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'ejs'));
+
 //set static directories
 app.use(express.static("public"));
 app.use('/pfp', express.static(path.join(__dirname, 'uploads/pfp')));
@@ -26,18 +29,10 @@ app.use(express.urlencoded({ extended: true }));
 //be able to access cookies
 app.use(cookieParser());
 
-app.get("/", (req, res) => {
-    const filePath = path.resolve(__dirname, 'public', 'login.html');
-    res.sendFile(filePath);
-});
-app.get("/login", (req, res) => {
-    const filePath = path.join(__dirname, "public", "login.html");
-    res.sendFile(filePath);
-});
-app.get("/profile", (req, res) => {
-    const filePath = path.join(__dirname, "public", "profile.html");
-    res.sendFile(filePath);
-});
+
+const router = require("./router.js")
+
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './uploads/pfp/');

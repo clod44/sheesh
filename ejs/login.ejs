@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,26 +22,11 @@
 
 <body class="bg-black vh-100 overflow-hidden">
 
-    <nav class="navbar navbar-expand-md bg-black bg-gradient sticky-top">
-        <div class="container-fluid">
-            <a href="./index.html" class="navbar-brand text-light mx-5 d-flex align-items-center">
-                <img src="./assets/images/logo.png" class="glow-image-warning" style="width: 3rem; height: 3rem;">
-                <h1 class="d-inline mx-3">Sheesh</h1>
-            </a>
-            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <div class="navbar-nav ms-auto">
-                    <a href="./index.html" class="nav-link text-light active">About</a>
-                    <a id="btn-navbar-global" href="#" class="nav-link text-light glow-text-warning">Global</a>
-                    <a href="./profile.html" class="nav-link text-light">Profile</a>
-                    <a href="#" class="nav-link text-light">Direct Messages</a>
-                </div>
-            </div>
-        </div>
-    </nav>
+    
+    <%- include('/ejs/navbar') %>
 
+    <main>
+        
     <div class="container-fluid h-100">
         <div class="row justify-content-center align-items-center h-100">
             <div class="col-md-10">
@@ -95,10 +83,12 @@
         });
     </script>
 
+    
+    </main>
 
 
 
-
+    <%- include('/ejs/footer') %>
 
 
 
